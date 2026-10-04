@@ -7,7 +7,9 @@ import {
   Activity,
   AlertTriangle,
   Clock,
-  TrendingDown
+  TrendingDown,
+  Layers,
+  ShieldAlert
 } from 'lucide-react';
 import {
   LineChart,
@@ -27,8 +29,8 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
 
   if (!furnace) {
     return (
-      <div className="p-8 text-center text-industrial-400 font-mono text-sm">
-        Furnace not found. <button onClick={onBack} className="text-metallo-orange underline">Return</button>
+      <div className="p-8 text-center text-[#9da1b5] font-mono text-sm">
+        Furnace not found. <button onClick={onBack} className="text-[#7c78e8] underline">Return to Furnaces</button>
       </div>
     );
   }
@@ -39,12 +41,12 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
   const currentHeat = furnace.currentHeat;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6">
       {/* Navigation & Header */}
-      <div className="flex items-center gap-4 border-b border-industrial-800 pb-4">
+      <div className="flex items-center gap-4 border-b border-[#2a2d42] pb-4">
         <button
           onClick={onBack}
-          className="p-1.5 rounded bg-industrial-900 border border-industrial-800 text-industrial-400 hover:text-white transition"
+          className="nm-btn p-2 rounded-[14px] text-[#9da1b5] hover:text-[#f5f5f7] transition"
           aria-label="Back to Furnaces"
         >
           <ArrowLeft size={16} />
@@ -52,72 +54,72 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
 
         <div className="flex-1 flex flex-wrap items-baseline justify-between gap-3">
           <div>
-            <div className="text-[11px] font-mono tracking-widest text-industrial-400 uppercase">
-              FURNACE DEEP DIVE
+            <div className="text-[11px] font-mono tracking-widest text-[#7c78e8] uppercase mb-1">
+              FURNACE DEEP DIVE & TELEMETRY
             </div>
-            <h1 className="text-2xl font-mono font-bold tracking-tight text-white mt-0.5 flex items-center gap-3">
+            <h1 className="text-2xl font-mono font-bold tracking-tight text-[#f5f5f7] flex items-center gap-3">
               <span>{furnace.name || furnace.furnaceId}</span>
               <StatusBadge status={furnace.status} size="md" />
             </h1>
           </div>
 
-          <div className="text-xs font-mono text-industrial-400">
-            Current Heat: <span className="text-white font-bold">{furnace.currentHeatId || 'None'}</span>
+          <div className="text-xs font-mono text-[#9da1b5]">
+            Active Melt Heat: <span className="text-[#f5f5f7] font-bold">{furnace.currentHeatId || 'Standby'}</span>
           </div>
         </div>
       </div>
 
       {/* Key Electrical & Thermal Metrics Banner */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Active Power</div>
-          <div className="text-lg font-bold text-white mt-0.5">{formatKw(furnace.currentPowerKw)}</div>
-          <div className="text-[10px] text-industrial-400">Rated: {furnace.meltingPowerKw} kW</div>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Active Power</div>
+          <div className="text-lg font-bold text-[#f5f5f7] mt-0.5">{formatKw(furnace.currentPowerKw)}</div>
+          <div className="text-[10px] text-[#9da1b5]">Rated: {furnace.meltingPowerKw} kW</div>
         </div>
 
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Bath Temp</div>
-          <div className="text-lg font-bold text-metallo-orange mt-0.5">{furnace.temperatureC}°C</div>
-          <div className="text-[10px] text-industrial-400">Target: 1480°C</div>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Bath Temp</div>
+          <div className="text-lg font-bold text-[#7c78e8] mt-0.5">{furnace.temperatureC}°C</div>
+          <div className="text-[10px] text-[#9da1b5]">Target: 1480°C</div>
         </div>
 
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Power Factor</div>
-          <div className={`text-lg font-bold mt-0.5 ${furnace.currentPf < 0.95 ? 'text-amber-400' : 'text-emerald-400'}`}>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Power Factor</div>
+          <div className={`text-lg font-bold mt-0.5 ${furnace.currentPf < 0.95 ? 'text-[#d8aa55]' : 'text-[#72c69a]'}`}>
             {furnace.currentPf?.toFixed(2)}
           </div>
-          <div className="text-[10px] text-industrial-400">Target: ≥0.95</div>
+          <div className="text-[10px] text-[#9da1b5]">Target: ≥0.95</div>
         </div>
 
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Apparent Load</div>
-          <div className="text-lg font-bold text-white mt-0.5">{formatKva(furnace.currentKva)}</div>
-          <div className="text-[10px] text-industrial-400">kW / PF</div>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Apparent Load</div>
+          <div className="text-lg font-bold text-[#f5f5f7] mt-0.5">{formatKva(furnace.currentKva)}</div>
+          <div className="text-[10px] text-[#9da1b5]">kVA Demand</div>
         </div>
 
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Today's Energy</div>
-          <div className="text-lg font-bold text-white mt-0.5">{formatKwh(furnace.todayEnergyKwh)}</div>
-          <div className="text-[10px] text-industrial-400">{furnace.todayProductionTonnes}t tapped</div>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Today's Energy</div>
+          <div className="text-lg font-bold text-[#f5f5f7] mt-0.5">{formatKwh(furnace.todayEnergyKwh)}</div>
+          <div className="text-[10px] text-[#9da1b5]">{furnace.todayProductionTonnes || 2}t tapped</div>
         </div>
 
-        <div className="bg-industrial-900 border border-industrial-800 p-3 rounded font-mono">
-          <div className="text-[10px] text-industrial-500 uppercase">Dynamic SEC</div>
-          <div className="text-lg font-bold text-metallo-orange mt-0.5">{formatSec(furnace.calculatedSec || 580)}</div>
-          <div className="text-[10px] text-industrial-400">Base: 580 kWh/t</div>
+        <div className="bg-[#25283a] border border-[#2e324a] p-3.5 rounded-[18px] shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] font-mono">
+          <div className="text-[10px] text-[#9da1b5] uppercase">Dynamic SEC</div>
+          <div className="text-lg font-bold text-[#7c78e8] mt-0.5">{formatSec(furnace.calculatedSec || 580)}</div>
+          <div className="text-[10px] text-[#9da1b5]">Base: 580 kWh/t</div>
         </div>
       </div>
 
       {/* Active Heat Visual Timeline (If current heat exists) */}
       {currentHeat && (
-        <div className="bg-industrial-900 border border-industrial-800 rounded p-4 space-y-3">
+        <div className="bg-[#25283a] border border-[#2e324a] rounded-[22px] p-5 shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] space-y-3">
           <div className="flex items-center justify-between">
-            <div className="text-xs font-mono uppercase tracking-wider text-metallo-orange font-semibold flex items-center gap-1.5">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#7c78e8] font-bold flex items-center gap-1.5">
               <Clock size={14} />
               <span>Current Heat Timeline ({currentHeat.heatId})</span>
             </div>
-            <div className="text-xs font-mono text-industrial-400">
-              Grade: <span className="text-industrial-200">{currentHeat.grade}</span> • {currentHeat.productionTonnes}t
+            <div className="text-xs font-mono text-[#9da1b5]">
+              Grade: <span className="text-[#f5f5f7]">{currentHeat.grade}</span> • {currentHeat.productionTonnes}t
             </div>
           </div>
 
@@ -134,14 +136,14 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
         </div>
       )}
 
-      {/* Tab Navigation */}
-      <div className="flex border-b border-industrial-800 text-xs font-mono">
+      {/* Tab Navigation (Neumorphic Pills) */}
+      <div className="flex gap-2 text-xs font-mono p-1 bg-[#1e2030] rounded-[18px] shadow-[inset_2px_2px_5px_rgba(20,21,42,0.45),inset_-2px_-2px_5px_rgba(42,45,66,0.30)] w-fit border border-[#2e324a]">
         <button
           onClick={() => setActiveTab('trends')}
-          className={`px-4 py-2 font-medium border-b-2 transition ${
+          className={`px-4 py-2 rounded-[14px] font-bold transition-all ${
             activeTab === 'trends'
-              ? 'border-metallo-orange text-white'
-              : 'border-transparent text-industrial-400 hover:text-industrial-200'
+              ? 'bg-[#25283a] text-[#7c78e8] shadow-[3px_3px_6px_rgba(20,21,42,0.45),-3px_-3px_6px_rgba(42,45,66,0.35)]'
+              : 'text-[#9da1b5] hover:text-[#f5f5f7]'
           }`}
         >
           Telemetry Trends
@@ -149,10 +151,10 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
 
         <button
           onClick={() => setActiveTab('heats')}
-          className={`px-4 py-2 font-medium border-b-2 transition ${
+          className={`px-4 py-2 rounded-[14px] font-bold transition-all ${
             activeTab === 'heats'
-              ? 'border-metallo-orange text-white'
-              : 'border-transparent text-industrial-400 hover:text-industrial-200'
+              ? 'bg-[#25283a] text-[#7c78e8] shadow-[3px_3px_6px_rgba(20,21,42,0.45),-3px_-3px_6px_rgba(42,45,66,0.35)]'
+              : 'text-[#9da1b5] hover:text-[#f5f5f7]'
           }`}
         >
           Associated Heats ({associatedHeats.length})
@@ -160,10 +162,10 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
 
         <button
           onClick={() => setActiveTab('alerts')}
-          className={`px-4 py-2 font-medium border-b-2 transition ${
+          className={`px-4 py-2 rounded-[14px] font-bold transition-all ${
             activeTab === 'alerts'
-              ? 'border-metallo-orange text-white'
-              : 'border-transparent text-industrial-400 hover:text-industrial-200'
+              ? 'bg-[#25283a] text-[#7c78e8] shadow-[3px_3px_6px_rgba(20,21,42,0.45),-3px_-3px_6px_rgba(42,45,66,0.35)]'
+              : 'text-[#9da1b5] hover:text-[#f5f5f7]'
           }`}
         >
           Active Alerts ({activeAlerts.length})
@@ -174,66 +176,83 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
       {activeTab === 'trends' && (
         <div className="space-y-6">
           {/* Power Trend Chart */}
-          <div className="bg-industrial-900 border border-industrial-800 rounded p-4">
-            <div className="flex items-center justify-between mb-3 text-xs font-mono">
-              <span className="font-bold text-white uppercase tracking-wider">
-                Power Draw (kW) & Apparent Load (kVA)
+          <div className="bg-[#25283a] border border-[#2e324a] rounded-[24px] p-6 shadow-[6px_6px_12px_rgba(20,21,42,0.45),-6px_-6px_12px_rgba(42,45,66,0.35)]">
+            <div className="flex items-center justify-between mb-4 text-xs font-mono">
+              <span className="font-bold text-[#f5f5f7] uppercase tracking-wider">
+                Active Power Draw (kW) & Apparent Load (kVA)
               </span>
-              <span className="text-industrial-400 text-[11px]">Real-time Telemetry Trend</span>
+              <span className="text-[#9da1b5] text-[11px]">Real-time Telemetry Series</span>
             </div>
-            <div className="h-56 w-full">
+            <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={trends}>
-                  <CartesianGrid stroke="#22222a" strokeDasharray="3 3" />
-                  <XAxis dataKey="time" stroke="#78788c" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#78788c" fontSize={11} tickLine={false} unit="kW" />
+                  <CartesianGrid stroke="rgba(42, 45, 66, 0.45)" strokeDasharray="3 3" />
+                  <XAxis dataKey="time" stroke="#9da1b5" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#9da1b5" fontSize={11} tickLine={false} unit="kW" />
                   <RechartsTooltip
-                    contentStyle={{ backgroundColor: '#111114', borderColor: '#282830', fontSize: '12px' }}
+                    contentStyle={{
+                      backgroundColor: '#25283a',
+                      borderColor: '#2e324a',
+                      borderRadius: '14px',
+                      color: '#f5f5f7',
+                      fontSize: '12px',
+                      boxShadow: '4px 4px 12px rgba(20,21,42,0.5)'
+                    }}
                   />
-                  <Line type="monotone" dataKey="powerKw" stroke="#ff5a1f" strokeWidth={2} dot={false} name="Active Power (kW)" />
-                  <Line type="monotone" dataKey="apparentPowerKva" stroke="#3b82f6" strokeWidth={1.5} dot={false} strokeDasharray="4 4" name="Apparent Load (kVA)" />
+                  <Line type="monotone" dataKey="powerKw" stroke="#7c78e8" strokeWidth={2.5} dot={false} name="Active Power (kW)" />
+                  <Line type="monotone" dataKey="apparentPowerKva" stroke="#72c69a" strokeWidth={1.5} dot={false} strokeDasharray="4 4" name="Apparent Load (kVA)" />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* Temperature & Power Factor Trends (Side by Side) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Temp Chart */}
-            <div className="bg-industrial-900 border border-industrial-800 rounded p-4">
-              <div className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-2">
-                Bath Temperature (°C)
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-[#25283a] border border-[#2e324a] rounded-[24px] p-6 shadow-[6px_6px_12px_rgba(20,21,42,0.45),-6px_-6px_12px_rgba(42,45,66,0.35)]">
+              <div className="text-xs font-mono font-bold text-[#f5f5f7] uppercase tracking-wider mb-4">
+                Bath Temperature Trend (°C)
               </div>
-              <div className="h-44 w-full">
+              <div className="h-48 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={trends}>
-                    <CartesianGrid stroke="#22222a" strokeDasharray="3 3" />
-                    <XAxis dataKey="time" stroke="#78788c" fontSize={10} tickLine={false} />
-                    <YAxis stroke="#78788c" fontSize={10} tickLine={false} domain={[400, 1600]} unit="°C" />
+                    <CartesianGrid stroke="rgba(42, 45, 66, 0.45)" strokeDasharray="3 3" />
+                    <XAxis dataKey="time" stroke="#9da1b5" fontSize={11} tickLine={false} />
+                    <YAxis stroke="#9da1b5" fontSize={11} tickLine={false} domain={[400, 1600]} unit="°C" />
                     <RechartsTooltip
-                      contentStyle={{ backgroundColor: '#111114', borderColor: '#282830', fontSize: '11px' }}
+                      contentStyle={{
+                        backgroundColor: '#25283a',
+                        borderColor: '#2e324a',
+                        borderRadius: '14px',
+                        color: '#f5f5f7',
+                        fontSize: '12px'
+                      }}
                     />
-                    <Line type="monotone" dataKey="temperatureC" stroke="#f59e0b" strokeWidth={2} dot={false} name="Temperature (°C)" />
+                    <Line type="monotone" dataKey="temperatureC" stroke="#d8aa55" strokeWidth={2} dot={false} name="Temp (°C)" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
-            {/* PF Chart */}
-            <div className="bg-industrial-900 border border-industrial-800 rounded p-4">
-              <div className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-2">
-                Power Factor (Target ≥ 0.95)
+            <div className="bg-[#25283a] border border-[#2e324a] rounded-[24px] p-6 shadow-[6px_6px_12px_rgba(20,21,42,0.45),-6px_-6px_12px_rgba(42,45,66,0.35)]">
+              <div className="text-xs font-mono font-bold text-[#f5f5f7] uppercase tracking-wider mb-4">
+                Power Factor Evolution
               </div>
-              <div className="h-44 w-full">
+              <div className="h-48 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={trends}>
-                    <CartesianGrid stroke="#22222a" strokeDasharray="3 3" />
-                    <XAxis dataKey="time" stroke="#78788c" fontSize={10} tickLine={false} />
-                    <YAxis stroke="#78788c" fontSize={10} tickLine={false} domain={[0.8, 1.0]} />
+                    <CartesianGrid stroke="rgba(42, 45, 66, 0.45)" strokeDasharray="3 3" />
+                    <XAxis dataKey="time" stroke="#9da1b5" fontSize={11} tickLine={false} />
+                    <YAxis stroke="#9da1b5" fontSize={11} tickLine={false} domain={[0.8, 1.0]} />
                     <RechartsTooltip
-                      contentStyle={{ backgroundColor: '#111114', borderColor: '#282830', fontSize: '11px' }}
+                      contentStyle={{
+                        backgroundColor: '#25283a',
+                        borderColor: '#2e324a',
+                        borderRadius: '14px',
+                        color: '#f5f5f7',
+                        fontSize: '12px'
+                      }}
                     />
-                    <Line type="monotone" dataKey="powerFactor" stroke="#10b981" strokeWidth={2} dot={false} name="Power Factor" />
+                    <Line type="monotone" dataKey="powerFactor" stroke="#72c69a" strokeWidth={2} dot={false} name="PF" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -244,76 +263,81 @@ export default function FurnaceDetail({ furnace, onBack, onSelectHeat }) {
 
       {/* Tab 2: Associated Heats */}
       {activeTab === 'heats' && (
-        <div className="bg-industrial-900 border border-industrial-800 rounded overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-industrial-950 text-industrial-400 border-b border-industrial-800">
-                <tr>
-                  <th className="p-3">Heat ID</th>
-                  <th className="p-3">Grade</th>
-                  <th className="p-3">Tonnes</th>
-                  <th className="p-3">Melt Time</th>
-                  <th className="p-3">Holding</th>
-                  <th className="p-3">Energy</th>
-                  <th className="p-3">SEC</th>
-                  <th className="p-3">Cost</th>
-                  <th className="p-3 text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-industrial-800/60">
-                {associatedHeats.map((h) => (
-                  <tr key={h.heatId} className="hover:bg-industrial-800/40">
-                    <td className="p-3 font-bold text-white">{h.heatId}</td>
-                    <td className="p-3 text-industrial-300">{h.grade}</td>
-                    <td className="p-3">{h.productionTonnes}t</td>
-                    <td className="p-3">{h.meltingDurationMinutes}m</td>
-                    <td className={`p-3 font-semibold ${h.holdingDurationMinutes > 30 ? 'text-red-400' : 'text-industrial-300'}`}>
+        <div className="bg-[#25283a] border border-[#2e324a] rounded-[24px] p-6 shadow-[6px_6px_12px_rgba(20,21,42,0.45),-6px_-6px_12px_rgba(42,45,66,0.35)] font-mono text-xs overflow-x-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b border-[#2e324a] text-[#9da1b5] uppercase text-[10px]">
+                <th className="pb-3 font-semibold">Heat ID</th>
+                <th className="pb-3 font-semibold">Status</th>
+                <th className="pb-3 font-semibold">Tonnage</th>
+                <th className="pb-3 font-semibold">Grade</th>
+                <th className="pb-3 font-semibold">Melt Start</th>
+                <th className="pb-3 font-semibold">Melt (min)</th>
+                <th className="pb-3 font-semibold">Hold (min)</th>
+                <th className="pb-3 font-semibold">Total Energy</th>
+                <th className="pb-3 font-semibold">SEC</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#2e324a]/60">
+              {associatedHeats.map((h) => (
+                <tr
+                  key={h.heatId}
+                  onClick={() => onSelectHeat && onSelectHeat(h.heatId)}
+                  className="hover:bg-[#202234] cursor-pointer transition"
+                >
+                  <td className="py-3 font-bold text-[#7c78e8]">{h.heatId}</td>
+                  <td className="py-3">
+                    <StatusBadge status={h.status} size="sm" />
+                  </td>
+                  <td className="py-3 text-[#f5f5f7]">{h.productionTonnes}t</td>
+                  <td className="py-3 text-[#9da1b5]">{h.grade}</td>
+                  <td className="py-3 text-[#9da1b5]">{formatTime(h.meltStartTime)}</td>
+                  <td className="py-3 text-[#f5f5f7]">{h.meltingDurationMinutes}m</td>
+                  <td className="py-3">
+                    <span className={h.holdingDurationMinutes > 30 ? 'text-[#d87878] font-bold' : 'text-[#9da1b5]'}>
                       {h.holdingDurationMinutes}m
-                    </td>
-                    <td className="p-3">{formatKwh(h.totalEnergyKwh)}</td>
-                    <td className="p-3 text-metallo-orange font-bold">{formatSec(h.secKwhPerTonne)}</td>
-                    <td className="p-3">{formatCurrency(h.tariffBreakdown?.totalCost)}</td>
-                    <td className="p-3 text-right">
-                      <button
-                        onClick={() => onSelectHeat(h.heatId)}
-                        className="text-metallo-orange hover:underline text-[11px]"
-                      >
-                        Inspect &rarr;
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </span>
+                  </td>
+                  <td className="py-3 text-[#f5f5f7]">{formatKwh(h.totalEnergyKwh)}</td>
+                  <td className="py-3 font-bold text-[#7c78e8]">{formatSec(h.secKwhPerTonne)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 
       {/* Tab 3: Active Alerts */}
       {activeTab === 'alerts' && (
-        <div className="space-y-3">
+        <div className="space-y-3 font-mono">
           {activeAlerts.length === 0 ? (
-            <div className="bg-industrial-900 border border-industrial-800 p-8 rounded text-center text-industrial-500 font-mono text-xs">
-              No active alerts logged for this furnace.
+            <div className="bg-[#25283a] border border-[#2e324a] rounded-[24px] p-8 text-center text-[#9da1b5] text-xs">
+              No unresolved alerts detected on this furnace. Operating normally.
             </div>
           ) : (
-            activeAlerts.map((alert) => (
+            activeAlerts.map((a) => (
               <div
-                key={alert.alertId}
-                className="bg-industrial-900 border border-industrial-800 rounded p-4 text-xs font-mono space-y-2"
+                key={a.alertId || a._id}
+                className="bg-[#25283a] border border-[#2e324a] rounded-[20px] p-5 shadow-[4px_4px_10px_rgba(20,21,42,0.45),-4px_-4px_10px_rgba(42,45,66,0.35)] space-y-2"
               >
-                <div className="flex items-center justify-between">
-                  <span className={`px-2 py-0.5 rounded font-bold ${alert.type === 'CRITICAL' ? 'bg-red-500/20 text-red-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                    {alert.type} • {alert.category}
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[#f5f5f7] flex items-center gap-2">
+                    <ShieldAlert size={14} className={a.type === 'CRITICAL' ? 'text-[#d87878]' : 'text-[#d8aa55]'} />
+                    <span>{a.title}</span>
                   </span>
-                  <span className="text-industrial-500">{formatTime(alert.timestamp)}</span>
+                  <span className="text-[10px] uppercase text-[#9da1b5]">
+                    {formatTime(a.timestamp)}
+                  </span>
                 </div>
-                <div className="font-bold text-white text-sm">{alert.title}</div>
-                <div className="text-industrial-300">{alert.message}</div>
-                <div className="bg-industrial-950 p-2.5 rounded border border-industrial-800 text-industrial-400">
-                  <span className="text-metallo-orange font-semibold">Recommended Inspection: </span>
-                  {alert.explainableAction}
-                </div>
+                <p className="text-xs text-[#9da1b5] leading-relaxed">
+                  {a.message}
+                </p>
+                {a.explainableAction && (
+                  <div className="bg-[#202234] border border-[#2e324a] rounded-[14px] p-3 text-[11px] text-[#72c69a]">
+                    <span className="font-bold">Recommendation: </span>
+                    {a.explainableAction}
+                  </div>
+                )}
               </div>
             ))
           )}

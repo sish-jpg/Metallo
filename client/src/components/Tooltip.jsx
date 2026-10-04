@@ -20,11 +20,11 @@ export default function Tooltip({ text, term, children }) {
       {visible && (
         <div
           role="tooltip"
-          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-2.5 bg-industrial-900 border border-industrial-700 text-industrial-200 text-xs rounded shadow-xl pointer-events-none"
+          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-[#25283a] border border-[#2e324a] text-[#c5c9dc] text-xs rounded-[14px] shadow-[6px_6px_14px_rgba(20,21,42,0.6)] pointer-events-none"
         >
-          {term && <div className="font-semibold text-metallo-orange mb-0.5">{term}</div>}
-          <div>{text}</div>
-          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-industrial-900" />
+          {term && <div className="font-semibold text-[#7c78e8] mb-1">{term}</div>}
+          <div className="leading-relaxed">{text}</div>
+          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#25283a]" />
         </div>
       )}
     </span>

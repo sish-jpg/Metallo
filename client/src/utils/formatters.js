@@ -47,45 +47,52 @@ export function formatDateTime(dateStr) {
 
 export const STATUS_THEME = {
   MELTING: {
-    bg: 'bg-metallo-orange/15',
-    text: 'text-metallo-orange',
-    border: 'border-metallo-orange/40',
-    indicator: 'bg-metallo-orange',
+    bg: 'bg-[#7c78e8]/15',
+    text: 'text-[#7c78e8]',
+    border: 'border-[#7c78e8]/30',
+    indicator: 'bg-[#7c78e8]',
     label: 'MELTING'
   },
   HOLDING: {
-    bg: 'bg-amber-500/15',
-    text: 'text-amber-400',
-    border: 'border-amber-500/40',
-    indicator: 'bg-amber-400',
+    bg: 'bg-[#d8aa55]/15',
+    text: 'text-[#d8aa55]',
+    border: 'border-[#d8aa55]/30',
+    indicator: 'bg-[#d8aa55]',
     label: 'HOLDING'
   },
   POURING: {
-    bg: 'bg-red-500/15',
-    text: 'text-red-400',
-    border: 'border-red-500/40',
-    indicator: 'bg-red-400',
+    bg: 'bg-[#d87878]/15',
+    text: 'text-[#d87878]',
+    border: 'border-[#d87878]/30',
+    indicator: 'bg-[#d87878]',
     label: 'POURING'
   },
   READY: {
-    bg: 'bg-emerald-500/15',
-    text: 'text-emerald-400',
-    border: 'border-emerald-500/40',
-    indicator: 'bg-emerald-400',
+    bg: 'bg-[#72c69a]/15',
+    text: 'text-[#72c69a]',
+    border: 'border-[#72c69a]/30',
+    indicator: 'bg-[#72c69a]',
     label: 'READY'
   },
+  RUNNING: {
+    bg: 'bg-[#7c78e8]/15',
+    text: 'text-[#7c78e8]',
+    border: 'border-[#7c78e8]/30',
+    indicator: 'bg-[#7c78e8]',
+    label: 'RUNNING'
+  },
   IDLE: {
-    bg: 'bg-industrial-700/30',
-    text: 'text-industrial-300',
-    border: 'border-industrial-600/40',
-    indicator: 'bg-industrial-400',
+    bg: 'bg-[#9da1b5]/15',
+    text: 'text-[#9da1b5]',
+    border: 'border-[#9da1b5]/30',
+    indicator: 'bg-[#9da1b5]',
     label: 'IDLE'
   },
   OFF: {
-    bg: 'bg-industrial-800/40',
-    text: 'text-industrial-400',
-    border: 'border-industrial-700/40',
-    indicator: 'bg-industrial-600',
+    bg: 'bg-[#58627e]/15',
+    text: 'text-[#58627e]',
+    border: 'border-[#58627e]/30',
+    indicator: 'bg-[#58627e]',
     label: 'OFF'
   }
 };

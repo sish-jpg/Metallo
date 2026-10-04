@@ -1,148 +1,274 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =========================================================
    METALLO
-   Black × Orange × White
-   Soft Neumorphic Industrial Design System
+   Tactile Neumorphic Dark Blue-Gray Theme
+   Exact visual match to attached reference screenshot
    ========================================================= */
 
 :root {
   color-scheme: dark;
 
-  /* Backgrounds */
-  --bg-primary: #080808;
-  --bg-secondary: #0d0d0d;
-  --bg-surface: #121212;
-  --bg-surface-soft: #171717;
-  --bg-inset: #0b0b0b;
+  /* Surfaces */
+  --bg-primary: #1e2030;
+  --bg-secondary: #1e2030;
+  --bg-surface: #25283a;
+  --bg-surface-elevated: #2a2d42;
+  --bg-inset: #1a1b2b;
 
-  /* Text */
-  --text-primary: #f5f5f5;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
+  /* Typography / Text */
+  --text-primary: #f5f5f7;
+  --text-secondary: #9da1b5;
+  --text-muted: #6b7280;
 
-  /* Metallo Orange */
-  --accent: #ff6a00;
-  --accent-bright: #ff7a1a;
-  --accent-dark: #c94f00;
-  --accent-soft: rgba(255, 106, 0, 0.14);
-  --accent-glow: rgba(255, 106, 0, 0.22);
+  /* Accents */
+  --accent: #7c78e8;
+  --accent-bright: #918df2;
+  --accent-dark: #635fc9;
+  --accent-soft: rgba(124, 120, 232, 0.16);
+  --accent-glow: rgba(124, 120, 232, 0.25);
 
   /* Status */
-  --success: #42c98a;
-  --warning: #f0a43c;
-  --danger: #ef5b4d;
-  --info: #7fa7ff;
+  --success: #72c69a;
+  --warning: #d8aa55;
+  --danger: #d87878;
+  --info: #7c78e8;
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.045);
-  --border-light: rgba(255, 255, 255, 0.075);
+  --border-subtle: rgba(42, 45, 66, 0.65);
+  --border-light: rgba(42, 45, 66, 0.9);
 
-  /* Shape */
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-
-  /* Neumorphic shadows */
+  /* Soft Dual-Shadow Neumorphic Elevation */
   --shadow-raised:
-    -5px -5px 12px rgba(255, 255, 255, 0.025),
-    7px 7px 18px rgba(0, 0, 0, 0.55);
+    6px 6px 12px rgba(20, 21, 42, 0.45),
+    -6px -6px 12px rgba(42, 45, 66, 0.35);
 
   --shadow-raised-hover:
-    -6px -6px 14px rgba(255, 255, 255, 0.03),
-    9px 9px 22px rgba(0, 0, 0, 0.65);
+    8px 8px 16px rgba(20, 21, 42, 0.55),
+    -8px -8px 16px rgba(42, 45, 66, 0.45);
 
   --shadow-inset:
-    inset 4px 4px 9px rgba(0, 0, 0, 0.55),
-    inset -3px -3px 8px rgba(255, 255, 255, 0.025);
-}
+    inset 4px 4px 8px rgba(20, 21, 42, 0.45),
+    inset -4px -4px 8px rgba(42, 45, 66, 0.30);
 
+  --shadow-inset-sm:
+    inset 2px 2px 5px rgba(20, 21, 42, 0.45),
+    inset -2px -2px 5px rgba(42, 45, 66, 0.30);
+
+  --shadow-button:
+    4px 4px 8px rgba(20, 21, 42, 0.45),
+    -4px -4px 8px rgba(42, 45, 66, 0.35);
+
+  --shadow-button-active:
+    inset 3px 3px 6px rgba(20, 21, 42, 0.45),
+    inset -3px -3px 6px rgba(42, 45, 66, 0.30);
+}
 
 /* =========================================================
    BASE
    ========================================================= */
 
-html {
-  background: var(--bg-primary);
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-
-  background:
-    radial-gradient(
-      circle at 82% 0%,
-      rgba(255, 106, 0, 0.055),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 5% 40%,
-      rgba(255, 255, 255, 0.012),
-      transparent 30%
-    ),
-    var(--bg-primary);
-
-  color: var(--text-primary);
-
-  font-family:
-    "Satoshi",
-    "General Sans",
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  overflow-x: hidden;
-}
-
-
-/* =========================================================
-   TYPOGRAPHY
-   ========================================================= */
-
-h1,
-h2,
-h3 {
-  font-family:
-    "General Sans",
-    "Satoshi",
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'General Sans', 'Satoshi', sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-
-h1,
-h2,
-h3,
-p {
+  color: var(--text-primary);
   margin-top: 0;
 }
 
-
 /* =========================================================
-   SELECTION
+   NEUMORPHIC SURFACES & UTILITY CLASSES
    ========================================================= */
 
-::selection {
-  background: rgba(255, 106, 0, 0.25);
-  color: var(--text-primary);
+.nm-card {
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-raised);
+  border-radius: 28px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.nm-card:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: var(--shadow-raised-hover);
+}
+
+.nm-card-static {
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-raised);
+  border-radius: 28px;
+}
+
+.nm-raised-container {
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-raised);
+  border-radius: 24px;
+}
+
+.nm-inset {
+  background-color: var(--bg-inset);
+  box-shadow: var(--shadow-inset);
+}
+
+.nm-inset-sm {
+  background-color: var(--bg-inset);
+  box-shadow: var(--shadow-inset-sm);
+}
+
+.nm-btn {
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-button);
+  border-radius: 18px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.nm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised-hover);
+}
+
+.nm-btn:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-button-active);
+}
+
+.nm-nav-active {
+  background-color: var(--bg-primary);
+  box-shadow: var(--shadow-inset-sm);
+  border-radius: 16px;
+  color: var(--accent);
+}
+
+.nm-search-bar {
+  background-color: var(--bg-primary);
+  box-shadow: var(--shadow-inset-sm);
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+}
+
+.nm-icon-box {
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-button);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nm-badge {
+  background-color: var(--bg-primary);
+  box-shadow: var(--shadow-inset-sm);
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================================================
+   ANIMATIONS & EFFECTS
+   ========================================================= */
+
+.float-bob {
+  animation: floatBob 3.2s ease-in-out infinite;
+}
+
+@keyframes floatBob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.pulse-progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background-color: var(--bg-inset);
+  box-shadow: var(--shadow-inset-sm);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.pulse-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pulse-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: pulseShimmer 2.2s infinite;
+}
+
+@keyframes pulseShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.pulse-glow {
+  animation: subtleGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(124, 120, 232, 0.2));
+  }
+  100% {
+    filter: drop-shadow(0 0 7px rgba(124, 120, 232, 0.5));
+  }
+}
+
+.dot-pulse {
+  animation: dotPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
 
 /* =========================================================
    SCROLLBAR
@@ -154,399 +280,14 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-  background: #080808;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #292929;
+  background: #2a2d42;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3a3a;
-}
-
-
-/* =========================================================
-   NEUMORPHIC SURFACES
-   ========================================================= */
-
-.matte-surface {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.018),
-      rgba(255, 255, 255, 0.004)
-    );
-
-  box-shadow:
-    var(--shadow-raised);
-
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.25s ease;
-}
-
-.matte-surface:hover {
-  box-shadow:
-    var(--shadow-raised-hover);
-}
-
-
-/* =========================================================
-   NEUMORPHIC UTILITY CLASSES
-   ========================================================= */
-
-.nm-flat {
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-raised);
-}
-
-.nm-flat-hover {
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-raised);
-
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nm-flat-hover:hover {
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: var(--shadow-raised-hover);
-}
-
-.nm-inset {
-  background: var(--bg-inset);
-  box-shadow: var(--shadow-inset);
-}
-
-.nm-button {
-  background: var(--bg-surface);
-  box-shadow:
-    -3px -3px 7px rgba(255, 255, 255, 0.025),
-    4px 4px 10px rgba(0, 0, 0, 0.5);
-
-  transition:
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.2s ease;
-}
-
-.nm-button:hover {
-  transform: translateY(-2px);
-}
-
-.nm-button:active {
-  transform: translateY(1px);
-
-  box-shadow:
-    inset 3px 3px 7px rgba(0, 0, 0, 0.5),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.02);
-}
-
-
-/* =========================================================
-   ORANGE ACCENTS
-   ========================================================= */
-
-.ombre-orange-gradient {
-  background:
-    radial-gradient(
-      circle at 85% 15%,
-      rgba(255, 106, 0, 0.16),
-      transparent 38%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(255, 106, 0, 0.075),
-      rgba(255, 106, 0, 0.012)
-    );
-
-  box-shadow:
-    var(--shadow-raised);
-}
-
-.glow-orange {
-  box-shadow:
-    0 0 24px rgba(255, 106, 0, 0.14);
-}
-
-.orange-glow-text {
-  text-shadow:
-    0 0 18px rgba(255, 106, 0, 0.25);
-}
-
-
-/* =========================================================
-   PROGRESS / TELEMETRY
-   ========================================================= */
-
-.progress-track {
-  height: 10px;
-  border-radius: 999px;
-
-  background: var(--bg-inset);
-
-  box-shadow: var(--shadow-inset);
-
-  overflow: hidden;
-}
-
-.progress-fill {
-  position: relative;
-  height: 100%;
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      90deg,
-      #c94f00,
-      #ff6a00,
-      #ff7a1a
-    );
-
-  box-shadow:
-    0 0 10px rgba(255, 106, 0, 0.25);
-
-  overflow: hidden;
-}
-
-.progress-fill::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  width: 200%;
-
-  background:
-    linear-gradient(
-      110deg,
-      transparent 35%,
-      rgba(255, 255, 255, 0.18) 50%,
-      transparent 65%
-    );
-
-  animation: waveShimmer 2.8s linear infinite;
-}
-
-@keyframes waveShimmer {
-  from {
-    transform: translateX(-50%);
-  }
-
-  to {
-    transform: translateX(0%);
-  }
-}
-
-
-/* =========================================================
-   ICON FLOAT
-   ========================================================= */
-
-.float-bob {
-  animation: floatBob 3s ease-in-out infinite;
-}
-
-@keyframes floatBob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-
-/* =========================================================
-   STATUS PULSE
-   ========================================================= */
-
-.heat-badge-pulse {
-  animation: heatPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes heatPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.65;
-  }
-}
-
-.glow-pulse {
-  animation: glowPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 3px rgba(255, 106, 0, 0.12));
-  }
-
-  50% {
-    filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.28));
-  }
-}
-
-
-/* =========================================================
-   ENTRANCE ANIMATION
-   ========================================================= */
-
-.slide-bounce {
-  animation: slideBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)
-    both;
-}
-
-@keyframes slideBounce {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* =========================================================
-   RIPPLE BUTTON
-   ========================================================= */
-
-.ripple-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple-button .ripple {
-  position: absolute;
-
-  width: 20px;
-  height: 20px;
-
-  border-radius: 999px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 106, 0, 0.35),
-      rgba(255, 106, 0, 0)
-    );
-
-  transform: translate(-50%, -50%) scale(0);
-
-  pointer-events: none;
-
-  animation:
-    rippleWave 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes rippleWave {
-  to {
-    transform: translate(-50%, -50%) scale(4);
-    opacity: 0;
-  }
-}
-
-
-/* =========================================================
-   TERMINAL / MONOSPACE
-   ========================================================= */
-
-.terminal {
-  background: var(--bg-inset);
-  box-shadow: var(--shadow-inset);
-
-  border-radius: 16px;
-
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace;
-}
-
-.cursor-blink::after {
-  content: "▋";
-
-  margin-left: 2px;
-
-  color: var(--accent);
-
-  animation: cursorBlink 1s steps(2, start) infinite;
-}
-
-@keyframes cursorBlink {
-  50% {
-    opacity: 0;
-  }
-}
-
-
-/* =========================================================
-   FORM CONTROLS
-   ========================================================= */
-
-input,
-select,
-textarea {
-  background: var(--bg-inset);
-  color: var(--text-primary);
-
-  border-color: var(--border-subtle);
-
-  box-shadow: var(--shadow-inset);
-
-  outline: none;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: rgba(255, 106, 0, 0.45);
-
-  box-shadow:
-    var(--shadow-inset),
-    0 0 0 2px rgba(255, 106, 0, 0.08);
-}
-
-
-/* =========================================================
-   LINKS
-   ========================================================= */
-
-a {
-  color: inherit;
-}
-
-
-/* =========================================================
-   BUTTONS / FORM TYPOGRAPHY
-   ========================================================= */
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button {
-  color: inherit;
+  background: #383c56;
 }
