@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-primary: #0a0a0c;
+  --bg-card: #121216;
+  --border-subtle: #22222a;
+}
+
+body {
+  margin: 0;
+  background-color: #0a0a0c;
+  color: #ededf2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d10;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a36;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3e3e4f;
+}
+
+/* Subtle Orange Ombré utility classes */
+.ombre-orange-gradient {
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.18) 0%, rgba(255, 90, 31, 0.02) 100%);
+}
+
+.ombre-orange-border {
+  border-image: linear-gradient(to right, #ff5a1f, rgba(255, 90, 31, 0.1)) 1;
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px -3px rgba(255, 90, 31, 0.3);
+}
+
+.heat-badge-pulse {
+  animation: heatPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes heatPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
